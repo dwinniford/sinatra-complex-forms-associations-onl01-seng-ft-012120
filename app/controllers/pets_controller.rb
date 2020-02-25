@@ -35,6 +35,8 @@ class PetsController < ApplicationController
   patch '/pets/:id' do 
     @pet = Pet.find(params[:id])
     if params[:owner][:name].length > 0 
+      new_owner = Owner.create(name: params[:owner][:name])
+      new_owner.pets << @pet 
     binding.pry 
     redirect to "pets/#{@pet.id}"
   end
